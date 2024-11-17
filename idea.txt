@@ -1,0 +1,11 @@
+=> Posts
+    => Users must be signed in to make a post
+    => Users must be signed in to make to comment or react to a post
+    => Post can have various tags related to the contents of the post
+    => Each post will have a mandatory title and optional body
+    => Each post will have a set reaction
+        => Upvote
+        => Downvote
+        => Laugh
+        => Amazed
+
