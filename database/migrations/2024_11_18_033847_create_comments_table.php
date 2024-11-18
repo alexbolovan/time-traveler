@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('body');
             $table->foreignId('user_id')->constrained(); // each comment is associated to a user
-            $table->foreignId('post_id')->constrained(); // each comment is associated to a post
+            $table->foreignId('prediction_id')->constrained(); // each comment is associated to a post
             $table->foreignId('parent_id')->nullable()->constrained('comments')->nullOnDelete(); // ensuring the one deep constraint will be in the model
             $table->timestamps();
         });

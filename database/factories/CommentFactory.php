@@ -18,6 +18,8 @@ class CommentFactory extends Factory
     {
         return [
             'body' => $this->faker->sentence(),
+            'user_id' => $this->faker->numberBetween(1, 10),
+            'prediction_id' => $this->faker->numberBetween(1, 10)
         ];
     }
 }
