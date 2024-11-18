@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('post_tag', function (Blueprint $table) {
-            $table->id();
-            $table->primary(['post_id', 'tag_id']);
+            // post_id and tag_id are an eloquent ORM convention where the id of a table can be referenced by table name + _id
             $table->foreignId('post_id')->constrained()->cascadeOnDelete();
             $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
-            // post_id and tag_id are an eloquent ORM convention where the id of a table can be referenced by table name + _id
+
+            $table->primary(['post_id', 'tag_id']);
 
 
         });
