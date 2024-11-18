@@ -1,11 +1,31 @@
-=> Posts
+=> Predictions (Posts)
     => Users must be signed in to make a post
     => Users must be signed in to make to comment or react to a post
     => Post can have various tags related to the contents of the post
-    => Each post will have a mandatory title and optional body
-    => Each post will have a set reaction
-        => Upvote
-        => Downvote
+        => Tags can be user created (similar to a subreddit)
+    => Each prediction will have a mandatory title and optional body
+    => Each prediction can have any of the following reactions reaction
+        => Up-vote
+        => Down-vote
         => Laugh
         => Amazed
+        => etc.
+
+=> Users
+    => Users must have a unique username
+    => User profile will contain the following
+        => username
+        => password
+        => description (optional)
+        => reaction score for each reaction type
+        => profile photo (ie link)
+
+=> Comments
+    => Each post will have associated comments
+    => Comments will have the same set of reactions as posts
+    => Comments can be will NOT be nested
+        => Overhead for tracking which comments relates what master comments becomes unwieldy
+
+
+
 
