@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Prediction extends Model
@@ -14,6 +16,21 @@ class Prediction extends Model
         'title',
         'body'
     ];
+
+    public function user() : BelongsTo {
+        return $this->belongsTo(User::class);
+    }
+
+    public function reactions() : HasMany {
+        return $this->hasMany(Reaction::class);
+    }
+
+    public function comments() : HasMany {
+        return $this->hasMany(Comment::class);
+    }
+
+
+
 
 
 }

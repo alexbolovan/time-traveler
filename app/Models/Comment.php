@@ -12,4 +12,10 @@ class Comment extends Model
     protected $fillable = [
         'body'
     ];
+
+    public function prediction() {
+        return $this->belongsTo(Prediction::class);
+    }
+
+
 }

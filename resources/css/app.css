@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Black Grid Background */
+/*#0a0a0a */
+
+/* General Body Styling */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0a0a0a; /* Very dark gray background */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), /* Horizontal grid lines */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px), /* Vertical grid lines */
+        radial-gradient(circle, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.95) 70%, #0a0a0a 100%); /* Fading effect */
+    background-size: 50px 50px, 50px 50px, 100%; /* Size of grid and fade */
+    background-blend-mode: normal, normal, multiply; /* Blend fade and grid */
+    background-repeat: repeat, repeat, no-repeat; /* Repeat grid but not radial gradient */
+    background-position: center, center, center;
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* Default text color */
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Add basic styling for your content */
