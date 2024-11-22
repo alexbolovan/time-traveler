@@ -27,17 +27,24 @@ export default function predictions({ auth, predictions }: PageProps<{ auth: boo
                             <div
                                 key={index}
                                 className="w-3/4 max-w-2xl p-6 bg-transparent shadow-lg rounded-lg mb-4 border border-white"
+                                // TODO: make it that onlick routes to the corresponding post
+                                onClick={() => console.log("hello")}
                             >
                                 <h2 className="text-2xl font-bold text-left">{item.title}</h2>
-                                <p className="text-gray-700 text-left">{item.user.name}</p>
+
+                                <p /*onclick should route to the corresponding users page*/ className="text-gray-700 text-left">{item.user.name}</p>
                                 <p className="text-gray-700 text-left">{item.body}</p>
                             </div>
                         ))}
                     </div>
 
-                    {/* Pagination */}
+                    {/* TODO: Impl better pagination */}
                     <div className="mt-auto p-4 bg-transparent">
-                        <Paginate />
+                        <Paginate
+                            currentPage={predictions.current_page}
+                            lastPage={predictions.last_page}
+                            links={predictions.links}
+                        />
                     </div>
                 </div>
             </div>
