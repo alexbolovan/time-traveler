@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Notifications\Notifiable;
 
 class Prediction extends Model
@@ -21,8 +22,8 @@ class Prediction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reactions() : HasMany {
-        return $this->hasMany(Reaction::class);
+    public function reactions() : morphMany {
+        return $this->morphMany(Reaction::class, 'reactionable');
     }
 
     public function comments() : HasMany {

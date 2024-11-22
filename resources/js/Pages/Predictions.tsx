@@ -1,20 +1,46 @@
-import {PageProps} from '@/types';
+import { PageProps } from '@/types';
 import Paginate from '@/Components/Paginate';
 
-export default function predictions({predictions}: PageProps<{ predictions: any }>) {
+import Authenticated from "@/Layouts/AuthenticatedLayout";
+import Guest from "@/Layouts/GuestLayout";
+import SideBar from "@/Pages/Partials/SideBar";
+import NavBar from "@/Pages/Partials/NavBar";
+
+export default function predictions({ auth, predictions }: PageProps<{ auth: boolean; predictions: any }>) {
+    const RenderedComponent = auth ? Authenticated : Guest;
+
     return (
-        <>
-            <h1 className="text-8xl">Predictions</h1>
-            {predictions.map((item: any, index: int) => (
-                <li key={index}>
-                    <h2 className="text-2xl">{item.prediction.title}</h2>
-                    <p>{item.prediction.body}</p>
-                </li>
-            ))}
+        <RenderedComponent>
 
-        <Paginate></Paginate>
+            {/* Main Layout */}
+            <div className="flex min-h-screen">
+                {/* Fixed Sidebar */}
+                <aside className="fixed top-0 left-0 h-screen w-64 bg-transparent text-white shadow-lg">
+                    <SideBar />
+                </aside>
 
+                {/* Main Content */}
+                <div className="flex-1 ml-64 bg-transparent">
+                    {/* Predictions Content */}
+                    <div className="flex flex-col items-center p-6">
+                        {predictions.data.map((item: any, index: number) => (
+                            <div
+                                key={index}
+                                className="w-3/4 max-w-2xl p-6 bg-transparent shadow-lg rounded-lg mb-4 border border-white"
+                            >
+                                <h2 className="text-2xl font-bold text-left">{item.title}</h2>
+                                <p className="text-gray-700 text-left">{item.user.name}</p>
+                                <p className="text-gray-700 text-left">{item.body}</p>
+                            </div>
+                        ))}
+                    </div>
 
-        </>
-    )
+                    {/* Pagination */}
+                    <div className="mt-auto p-4 bg-transparent">
+                        <Paginate />
+                    </div>
+                </div>
+            </div>
+        </RenderedComponent>
+    );
 }
