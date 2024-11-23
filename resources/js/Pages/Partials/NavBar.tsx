@@ -24,6 +24,7 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import {PageProps} from "@/types";
 import { Link, usePage } from '@inertiajs/react';
+import TextInput from "@/Components/TextInput";
 
 
 
@@ -64,16 +65,11 @@ export default function NavBar({ auth } : PageProps<{ auth: boolean }>) {
                     </button>
                 </div>
                 <div className="hidden lg:flex lg:gap-x-12">
+                    <div className="inline-flex items-center justify-center rounded-md space-x-4">
+                        <TextInput></TextInput>
+                        <a>Submit</a>
+                    </div>
 
-                    <a href="#" className="text-sm/6 font-semibold text-white">
-                        Features
-                    </a>
-                    <a href="#" className="text-sm/6 font-semibold text-white">
-                        Marketplace
-                    </a>
-                    <a href="#" className="text-sm/6 font-semibold text-white">
-                        Company
-                    </a>
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     {auth ?

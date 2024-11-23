@@ -1,0 +1,16 @@
+* Design pages to get of idea how site should look like (don't bother with styling)
+    * Home page
+        * Change the sidebar, with necessary links
+        * Side bar should contain links for most recently visited posts
+        * Change navbar to search + registration information
+        * Fix login and logout and add profile section (when authenticated)
+    * Post
+        * Design page similar to reddit and stack exchange
+        * Each post should have the title + body at the top and the associated comments below
+        * There should be a drop-down button for filtering by best, worst, and newest
+        * Each comment should have the comment + associated comments
+        * Each element (comments, sub-comments, and body) should display reactions
+
+
+
+

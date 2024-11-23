@@ -27,7 +27,7 @@ export default function predictions({ auth, predictions }: PageProps<{ auth: boo
                             <div
                                 key={index}
                                 className="w-3/4 max-w-2xl p-6 bg-transparent shadow-lg rounded-lg mb-4 border border-white"
-                                // TODO: make it that onlick routes to the corresponding post
+                                // TODO: make it that onclick routes to the corresponding post
                                 onClick={() => console.log("hello")}
                             >
                                 <h2 className="text-2xl font-bold text-left">{item.title}</h2>
