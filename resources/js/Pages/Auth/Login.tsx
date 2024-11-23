@@ -29,7 +29,7 @@ export default function Login({
     };
 
     return (
-        <GuestLayout>
+        <div className="flex min-h-screen justify-center pt-12">
             <Head title="Log in" />
 
             {status && (
@@ -102,6 +102,6 @@ export default function Login({
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        </div>
     );
 }

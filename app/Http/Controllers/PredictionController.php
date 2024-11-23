@@ -25,13 +25,28 @@ class PredictionController extends Controller
         // convert to assoc array so we can process it easier in the tsx file
         $prediction = $prediction->toArray();
 
-        //dd($prediction);
-
-
-
-        //dd($prediction);
         return Inertia::render('Predictions', [
             'predictions' =>  $prediction,
+            'auth' => Auth::user()
+        ]);
+    }
+
+
+    public function show(Request $request, $id) {
+        // this might be querying too much info that we do not need
+        $prediction = Prediction::with([
+            'user',
+            'comments.user',
+            'comments.reactions.user',
+            'reactions.user'
+        ])->get();
+
+        $prediction = $prediction->toArray();
+
+
+        return Inertia::render("Prediction", [
+            'prediction' => $prediction,
+            'id' => $id,
             'auth' => Auth::user()
         ]);
     }

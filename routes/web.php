@@ -18,6 +18,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/predictions', [PredictionController::class, 'index'])->name('predictions.index');
+Route::get('prediction/{id}', [PredictionController::class, 'show'])->name('predictions.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
