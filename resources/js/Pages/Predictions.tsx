@@ -34,8 +34,8 @@ export default function predictions({ auth, predictions }: PageProps<{ auth: boo
 
                                 >
                                     <h2 className="text-2xl font-bold text-left">{item.title}</h2>
-                                    <p /*onclick should route to the corresponding users page*/
-                                        className="text-gray-700 text-left">{item.user.name}</p>
+                                    <Link href={route('predictions.show', index + 2)} /*temporary test for going to the users profile*/
+                                        className="text-gray-700 text-left hover:underline">{item.user.name}</Link>
                                     <p className="text-gray-700 text-left">{item.body}</p>
                                 </div>
                                 </Link>
