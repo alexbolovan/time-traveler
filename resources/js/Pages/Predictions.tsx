@@ -5,6 +5,8 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Guest from "@/Layouts/GuestLayout";
 import SideBar from "@/Pages/Partials/SideBar";
 import NavBar from "@/Pages/Partials/NavBar";
+import NavLink from "@/Components/NavLink";
+import { Link, usePage } from '@inertiajs/react';
 
 export default function predictions({ auth, predictions }: PageProps<{ auth: boolean; predictions: any }>) {
     const RenderedComponent = auth ? Authenticated : Guest;
@@ -22,21 +24,23 @@ export default function predictions({ auth, predictions }: PageProps<{ auth: boo
                 {/* Main Content */}
                 <div className="flex-1 ml-64 bg-transparent">
                     {/* Predictions Content */}
-                    <div className="flex flex-col items-center p-6">
-                        {predictions.data.map((item: any, index: number) => (
-                            <div
-                                key={index}
-                                className="w-3/4 max-w-2xl p-6 bg-transparent shadow-lg rounded-lg mb-4 border border-white"
-                                // TODO: make it that onclick routes to the corresponding post
-                                onClick={() => console.log("hello")}
-                            >
-                                <h2 className="text-2xl font-bold text-left">{item.title}</h2>
+                        <div className="flex flex-col items-center p-6">
+                            {predictions.data.map((item: any, index: number) => (
+                                <Link href={route('predictions.show', index + 1)}>
+                                <div
+                                    key={index}
+                                    className="w-3/4 max-w-2xl p-6 bg-transparent shadow-lg rounded-lg mb-4 border border-white"
+                                    // TODO: make it that onclick routes to the corresponding post
 
-                                <p /*onclick should route to the corresponding users page*/ className="text-gray-700 text-left">{item.user.name}</p>
-                                <p className="text-gray-700 text-left">{item.body}</p>
-                            </div>
-                        ))}
-                    </div>
+                                >
+                                    <h2 className="text-2xl font-bold text-left">{item.title}</h2>
+                                    <p /*onclick should route to the corresponding users page*/
+                                        className="text-gray-700 text-left">{item.user.name}</p>
+                                    <p className="text-gray-700 text-left">{item.body}</p>
+                                </div>
+                                </Link>
+                            ))}
+                        </div>
 
                     {/* TODO: Impl better pagination */}
                     <div className="mt-auto p-4 bg-transparent">
