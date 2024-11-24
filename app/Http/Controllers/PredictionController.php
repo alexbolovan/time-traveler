@@ -15,8 +15,6 @@ class PredictionController extends Controller
     public function index(Request $request)  {
         $prediction = Prediction::with([
             'user',
-            'comments.user',
-            'comments.reactions.user',
             'reactions.user'
 
         ])->paginate(10);
@@ -38,11 +36,13 @@ class PredictionController extends Controller
             'user',
             'comments.user',
             'comments.reactions.user',
+            'comments.comments',
             'reactions.user'
-        ])->get();
+        ])->findOrFail($id); // filter results by the id of Predictions
 
         $prediction = $prediction->toArray();
 
+        dd($prediction);
 
         return Inertia::render("Prediction", [
             'prediction' => $prediction,

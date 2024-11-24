@@ -16,6 +16,10 @@ class Comment extends Model
         'body'
     ];
 
+    public function comments() : HasMany {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
+
 
     public function prediction() : BelongsTo {
         return $this->belongsTo(Prediction::class);
