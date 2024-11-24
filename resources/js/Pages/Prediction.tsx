@@ -15,12 +15,15 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
                 <ul>
                     {prediction.comments.map((comment: string, index: number) => (
                         <div className="flex-col space-y-4">
-                            <li key={index}>
-                                <p>Comment: {comment.body}</p>
-                                {comment.comments.map((subcomment: string, index: number) => (
-                                    <p>Subcomment: {subcomment.body}</p>
-                                ))}
-                            </li>
+                            {!comment.parent_id ?
+                                <li key={index}>
+                                    <p>Comment: {comment.body}</p>
+                                    {comment.comments.map((subcomment: string, index: number) => (
+                                        <p>Subcomment: {subcomment.body}</p>
+                                    ))}
+                                </li>
+                                : null
+                            }
 
                         </div>
                     ))}
