@@ -42,7 +42,7 @@ class PredictionController extends Controller
 
         $prediction = $prediction->toArray();
 
-        dd($prediction);
+        //dd($prediction);
 
         return Inertia::render("Prediction", [
             'prediction' => $prediction,

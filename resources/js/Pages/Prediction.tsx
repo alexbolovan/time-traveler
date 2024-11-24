@@ -5,16 +5,27 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
 
     return (
         <>
-            <h1>{prediction.title}</h1>
-            <p>{prediction.name}</p>
-            <ul>
-                <li>
-                    <div>
-                        <p>Comment 1</p>
-                    </div>
-                </li>
+            <div className="flex-col space-y-2 pb-6">
+                <h1><pre>Title </pre> {prediction.title}</h1>
+                <p><pre>Body </pre> {prediction.body}</p>
+            </div>
 
-            </ul>
+            <div className="flex-col space-y-2 pb-6">
+                <h2 className="underline">Comments</h2>
+                <ul>
+                    {prediction.comments.map((comment: string, index: number) => (
+                        <div className="flex-col space-y-4">
+                            <li key={index}>
+                                <p>Comment: {comment.body}</p>
+                                {comment.comments.map((subcomment: string, index: number) => (
+                                    <p>Subcomment: {subcomment.body}</p>
+                                ))}
+                            </li>
+
+                        </div>
+                    ))}
+                </ul>
+            </div>
         </>
     )
 }
