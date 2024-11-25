@@ -19,11 +19,12 @@ export default function Authenticated({
 
     return (
         // add banner at the top here for authenticated user
-        <div className="flex  max-w-7xl mx-auto h-screen">
+        <div className="flex max-w-7xl mx-auto h-screen">
             {/* Fixed Navbar */}
             <div className="fixed top-0 left-0 w-full bg-black z-10">
                 <NavBar/>
             </div>
+
             <div className="flex h-screen">
                 {/* Sidebar */}
                 <div className="w-64 fixed top-0 left-0 h-full bg-black text-white z-20 hidden md:block">
@@ -33,14 +34,13 @@ export default function Authenticated({
                 {/* Main Content */}
                 <div
                     className={`flex-1 p-4 max-w-4xl mx-auto
-                md:ml-64
-                flex items-center justify-center
-                md:items-start md:justify-start`}
+            md:ml-64
+            flex items-start justify-start
+            pt-16`}
                 >
-                    <div className="mt-16 md:mt-0">{children}</div>
+                    <div>{children}</div>
                 </div>
             </div>
-
         </div>
 
     );
