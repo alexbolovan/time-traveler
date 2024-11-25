@@ -18,14 +18,15 @@ export default function Authenticated({
 
     return (
         // add banner at the top here for authenticated user
-        <div>
-            <NavBar
-                auth={true}
-            />
+        <div className="max-w-7xl mx-auto justify-center items-center h-screen">
+            <div className="fixed top-0 left-0 w-full bg-black">
+                <NavBar/>
+            </div>
 
-            <div>
+            <div className="mt-16">
                 {children}
             </div>
         </div>
+
     );
 }

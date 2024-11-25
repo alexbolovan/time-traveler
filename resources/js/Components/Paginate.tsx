@@ -13,7 +13,7 @@ export default function Paginate({ currentPage, lastPage, links }: { currentPage
     };
 
     return (
-        <div className="flex items-center justify-between bg-transparent px-4 py-3 sm:px-6">
+        <div className="flex items-center justify-between bg-transparent py-3 sm:px-6">
             <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                 <div>
                     <p className="text-sm text-white">

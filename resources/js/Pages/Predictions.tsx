@@ -1,4 +1,4 @@
-import { PageProps } from '@/types';
+import {PageProps} from '@/types';
 import Paginate from '@/Components/Paginate';
 
 import Authenticated from "@/Layouts/AuthenticatedLayout";
@@ -6,51 +6,36 @@ import Guest from "@/Layouts/GuestLayout";
 import SideBar from "@/Pages/Partials/SideBar";
 import NavBar from "@/Pages/Partials/NavBar";
 import NavLink from "@/Components/NavLink";
-import { Link, usePage } from '@inertiajs/react';
+import Logo from "@/Components/Logo";
+import {Link, usePage} from '@inertiajs/react';
 
-export default function predictions({ auth, predictions }: PageProps<{ auth: boolean; predictions: any }>) {
+export default function predictions({auth, predictions}: PageProps<{ auth: boolean; predictions: any }>) {
     const RenderedComponent = auth ? Authenticated : Guest;
 
     return (
         <RenderedComponent>
+            {/* Body goes here */}
+            {/* We do not render any navigation, but the posts here */}
+            <div className="flex flex-col space-y-4">
 
-            {/* Main Layout */}
-            <div className="flex min-h-screen">
-                {/* Fixed Sidebar */}
-                <aside className="fixed top-0 left-0 h-screen w-64 bg-transparent text-white shadow-lg">
-                    <SideBar />
-                </aside>
-
-                {/* Main Content */}
-                <div className="flex-1 ml-64 bg-transparent">
-                    {/* Predictions Content */}
-                        <div className="flex flex-col items-center p-6">
-                            {predictions.data.map((item: any, index: number) => (
-                                <Link href={route('predictions.show', index + 1)}>
-                                <div
-                                    key={index}
-                                    className="w-3/4 max-w-2xl p-6 bg-transparent shadow-lg rounded-lg mb-4 border border-white"
-                                    // TODO: make it that onclick routes to the corresponding post
-
-                                >
-                                    <h2 className="text-2xl font-bold text-left">{item.title}</h2>
-                                    <Link href={route('predictions.show', index + 2)} /*temporary test for going to the users profile*/
-                                        className="text-gray-700 text-left hover:underline">{item.user.name}</Link>
-                                    <p className="text-gray-700 text-left">{item.body}</p>
-                                </div>
-                                </Link>
-                            ))}
+                {predictions.data.map((item: any, index: number) => (
+                    <Link href={route('predictions.show', index + 1)}>
+                        <div className="flex flex-col space-y-3 border border-white rounded-md p-2" key={index}>
+                            <div className="flex flex-col">
+                                <h1 className="text-2xl">{item.title}</h1>
+                                <Link className="hover:underline" href={route('predictions.show', index + 2)}>{item.user.name}</Link>
+                            </div>
+                            <p>{item.body}</p>
                         </div>
+                    </Link>
+                ))}
 
-                    {/* TODO: Impl better pagination */}
-                    <div className="mt-auto p-4 bg-transparent">
-                        <Paginate
-                            currentPage={predictions.current_page}
-                            lastPage={predictions.last_page}
-                            links={predictions.links}
-                        />
-                    </div>
-                </div>
+                {/* TODO: Impl better pagination */}
+                <Paginate
+                    currentPage={predictions.current_page}
+                    lastPage={predictions.last_page}
+                    links={predictions.links}
+                />
             </div>
         </RenderedComponent>
     );
