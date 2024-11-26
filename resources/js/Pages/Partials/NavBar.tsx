@@ -3,12 +3,20 @@ import TextInput from "@/Components/TextInput";
 export default function NavBar() {
     return (
         <>
-            <div className="flex flex-row justify-center items-center space-x-8">
-                <p className="pl-2">Logo</p>
-                <TextInput className="flex-none hidden sm:block"/>
-                <p className="pr-2">Auth</p>
-            </div>
+            <div className="flex flex-row items-center justify-between w-full">
+                {/* Placeholder for left alignment */}
+                <div className="flex-1"></div>
 
+                {/* Center Input */}
+                <div className="flex-none">
+                    <TextInput className="hidden sm:block"/>
+                </div>
+
+                {/* Auth Section on the Right */}
+                <div className="flex-1 flex justify-end mr-4">
+                    <p>Auth</p>
+                </div>
+            </div>
 
         </>
     )
