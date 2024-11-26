@@ -11,7 +11,7 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
-    background-color: #0a0a0a; /* Very dark gray background */
+    background-color: black; /* Very dark gray background */
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), /* Horizontal grid lines */
         linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px); /* Vertical grid lines */
