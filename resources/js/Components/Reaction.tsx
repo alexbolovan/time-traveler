@@ -1,47 +1,30 @@
 import {PageProps} from "@/types";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Inertia} from "@inertiajs/inertia";
 
-function Bubble({children}: PageProps<{ children: any }>) {
-    return (
-        <span
-            className="inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium text-white ring-2 ring-inset ring-gray-200"
-            onClick={(e) => {
-                console.log("Like")
-                e.stopPropagation();
-            }}>
-            {children}
-    </span>
 
-    );
-
-}
-
-
-export default function Reaction({like_count, dislike_count, amazed_count, clown_count}: PageProps<{
+export default function Reaction({like_count, dislike_count, amazed_count, clown_count, curr_reaction}: PageProps<{
     like_count: number,
     dislike_count: number,
     amazed_count: number,
-    clown_count: number
+    clown_count: number,
+    curr_reaction: string
 }>) {
 
-    // as per comment below set these dynamically based on current status of db regarding if the user has made a reaction to certain prediction
-    const [toggle, setToggle] = useState({
-        like: false,
-        dislike: false,
-        amazed: false,
-        clown: false
-    });
 
-    // TODO: fix this approach
-    // the main issue is that one page reloads we will be free to toggle again even though its not in the database
-    // we need to rethink this completely
-    // just off my dome one approach would be to have to query the database first and determine whether and/or which reaction has been made
-    // this will then set our item in the correct initial state and any modifications from then on would be in sync with the db
-    // this should only be done upon initialization of the component
-        // https://www.reddit.com/r/reactjs/comments/1ab8pj7/what_is_the_best_way_to_execute_a_piece_of_code/
+    let reactions = {
+        like: curr_reaction == 'like',
+        dislike: curr_reaction == 'dislike',
+        amazed: curr_reaction == 'amazed',
+        clown: curr_reaction == 'clown',
+    }
+
+    // as per comment below set these dynamically based on current status of db regarding if the user has made a reaction to certain prediction
+    const [toggle, setToggle] = useState({reactions});
+
 
     const handleToggle = (reaction: string) => {
+        console.log(curr_reaction);
         const updatedToggle = {
             like: reaction === 'like' ? !toggle.like : false,
             dislike: reaction === 'dislike' ? !toggle.dislike : false,
@@ -52,7 +35,7 @@ export default function Reaction({like_count, dislike_count, amazed_count, clown
         setToggle(updatedToggle);
 
         // Use the updated value immediately
-        Inertia.get(route('reactions.update', updatedToggle));
+        Inertia.post(route('reactions.update', updatedToggle));
 
     };
 

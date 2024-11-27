@@ -14,6 +14,9 @@ class PredictionController extends Controller {
     // get data when on 'predictions page'
     public function index(Request $request) {
 
+        // getting the current users id for comparsion
+        $userId = auth()->id();
+
         // 'with' function provides the nested related fields
         $prediction = Prediction::with([
             'user',
@@ -22,6 +25,8 @@ class PredictionController extends Controller {
             // withCount passes these items in the attributes section of the response as 'additional fields'
             // it knows reaction_type through some sort of laravel magic from the reaction type
             // the long form way of doing this would be to use the query-builder and build it from scratch, ie (select, join, ...)
+            // NOTE all these 'fields' (ie like_count) can be accessed at the top level with item.{field}
+                // the actual schema by dd is misleading
             ->withCount([
                 'reactions as like_count' => function ($query) {
                     $query->where('reaction_type', 'like');
@@ -34,6 +39,9 @@ class PredictionController extends Controller {
                 },
                 'reactions as clown_count' => function ($query) {
                     $query->where('reaction_type', 'clown');
+                },
+                'reactions as has_reacted' => function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
                 }
             ])
             ->paginate(10);
