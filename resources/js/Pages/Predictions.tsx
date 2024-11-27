@@ -34,7 +34,12 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
                         <p className="text-sm hover:underline">{item.user.name}</p>
                     </div>
                     <div className="px-4 pb-2 sm:p-6">{item.body}</div>
-                    <Reaction/>
+                    <Reaction
+                        like_count={item.like_count}
+                        dislike_count={item.dislike_count}
+                        amazed_count={item.amazed_count}
+                        clown_count={item.clown_count}
+                    />
                 </div>
                 //</Link>
             ))}

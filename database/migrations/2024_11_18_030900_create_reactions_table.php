@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // who made reaction
-            $table->morphs('reactionable'); // polymorphic depending on model being either post or comment
+
+            // polymorphic depending on model being either post or comment (model should be specified here ie. App\Models\Prediction)
+            // in the table there will also be an associated reactionable_id which specify the ID of the item in the model we select
+            $table->morphs('reactionable');
             $table->string('reaction_type'); // this will need to be verified in the model
 
             $table->unique(['user_id', 'post_id', 'reaction_type']);
