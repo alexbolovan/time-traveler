@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PredictionController;
+use App\Http\Controllers\ReactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,8 +21,8 @@ Route::get('/dashboard', function () {
 Route::get('/predictions', [PredictionController::class, 'index'])->name('predictions.index');
 Route::get('/prediction/{id}', [PredictionController::class, 'show'])->name('predictions.show');
 
-
-Route::post('/update/{id}/{type}', [PredictionController::class, 'update'])->name('predictions.update');
+// get for debug currently!
+Route::get('/update', [ReactionController::class, 'update'])->name('reactions.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
