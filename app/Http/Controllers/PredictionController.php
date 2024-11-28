@@ -32,7 +32,7 @@ class PredictionController extends Controller {
     // get data when on 'predictions page'
     public function index(Request $request) {
 
-        // getting the current users id for comparsion
+        // getting the current users id for comparison
         $userId = auth()->id();
 
 

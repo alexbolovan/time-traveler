@@ -17,21 +17,44 @@ export default function Reaction({
     clown_count: number;
     curr_reaction: string | null;
 }>) {
-    // Initialize reactions based on the current reaction
-    const [toggle, setToggle] = useState({
+
+    let reactions_states = {
         like: curr_reaction === "like",
         dislike: curr_reaction === "dislike",
         amazed: curr_reaction === "amazed",
         clown: curr_reaction === "clown",
-    });
 
-    // Local state for counts
-    const [counts, setCounts] = useState({
-        like: like_count,
-        dislike: dislike_count,
-        amazed: amazed_count,
-        clown: clown_count,
-    });
+    }
+
+
+    // Initialize reactions based on the current reaction
+    const [toggle, setToggle] = useState(reactions_states);
+    const [curr, setCurr] = useState(curr_reaction); // Use state for curr
+
+    const handleToggle = (reaction_type : string) => {
+        // If the clicked reaction is already active, reset all reactions
+        if (reaction_type === curr) {
+            setCurr(null); // Clear the current reaction
+            setToggle({
+                like: false,
+                dislike: false,
+                amazed: false,
+                clown: false,
+            });
+            return;
+        }
+
+        // Otherwise, set the new reaction
+        setCurr(reaction_type);
+
+        setToggle({
+            like: reaction_type === "like",
+            dislike: reaction_type === "dislike",
+            amazed: reaction_type === "amazed",
+            clown: reaction_type === "clown",
+        });
+
+    }
 
 
 
@@ -46,7 +69,7 @@ return (
                     e.stopPropagation();
                 }}
             >
-                👍 {curr_reaction} {counts.like}
+                👍 {like_count + (toggle.like ? 1 : 0)}
             </span>
         <span
             className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
@@ -57,7 +80,7 @@ return (
                 e.stopPropagation();
             }}
         >
-                👎 {counts.dislike}
+                👎 {dislike_count + (toggle.dislike ? 1 : 0)}
             </span>
         <span
             className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
@@ -68,7 +91,7 @@ return (
                 e.stopPropagation();
             }}
         >
-                🤯 {counts.amazed}
+                🤯 {amazed_count + (toggle.amazed ? 1 : 0)}
             </span>
         <span
             className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
@@ -79,7 +102,7 @@ return (
                 e.stopPropagation();
             }}
         >
-                🤡 {counts.clown}
+                🤡 {clown_count  + (toggle.clown ? 1 : 0)}
             </span>
     </div>
 );
