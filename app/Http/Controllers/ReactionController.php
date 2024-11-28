@@ -2,31 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prediction;
 use Illuminate\Http\Request;
+use Inertia\Response;
 
 class ReactionController extends Controller
 {
 
-    public function get(Request $request) : Request {
-
-    }
 
 
 
-    public function update(Request $request) : Request {
-        // check if the current value is in the database for the given id
+    public function update(Request $request) {
+        $reaction = $request->input('reaction'); // Could be 'like', 'dislike', etc., or null
 
-        dd($request->all());
+        //dd($request->all());
+        // failing here!
+        $prediction = Prediction::findOrFail($request->input('prediction_id'));
+        $user = auth()->user();
 
-        //if ($request->all()['like'] == 1) {
+        $prediction->reactions()->where('user_id', $user->id)->delete();
 
-        //} else if ($request->all()['like'] == 2) {
-
-        //} else if ($request->all()['like'] == 3) {
-
-        //} else if ($request->all()['like'] == 4) {
-
-        //}
+        // Add new reaction if provided
+        if ($reaction) {
+            $prediction->reactions()->create([
+                'user_id' => $user->id,
+                'reaction_type' => $reaction,
+            ]);
+        }
+        return response()->json(['success' => true]);
     }
 
 

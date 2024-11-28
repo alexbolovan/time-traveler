@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Reaction extends Model
 {
 
+    protected $fillable = [
+        'user_id',
+        'reaction_type'
+    ];
+
     public function reactionable(): morphTo {
         return $this->morphTo();
     }

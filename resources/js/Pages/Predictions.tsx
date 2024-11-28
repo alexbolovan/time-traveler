@@ -39,9 +39,9 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
                         dislike_count={item.dislike_count}
                         amazed_count={item.amazed_count}
                         clown_count={item.clown_count}
-                        curr_reaction={item.reactions.length > 0 ?
-                             item.reactions[0].reaction_type : "none"}
+                        curr_reaction={item.has_reacted > 0 ? item.reactions[0].reaction_type : "none"}
                     />
+                    {/* there should never be more than 1, but just in case we just grab the first one */}
                 </div>
                 //</Link>
             ))}

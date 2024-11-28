@@ -9,18 +9,39 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Prediction;
+use function Psy\debug;
+
 
 class PredictionController extends Controller {
+    function debug($prediction) {
+        $fields = collect($prediction->items())->map(function ($item) {
+            return [
+                'id' => $item['id'], // Add the fields you want to inspect
+                'like_count' => $item['like_count'],
+                'dislike_count' => $item['dislike_count'],
+                'amazed_count' => $item['amazed_count'],
+                'clown_count' => $item['clown_count'],
+                'has_reacted' => $item['has_reacted'],
+                // Add any other fields as necessary
+            ];
+        });
+
+
+
+    }
     // get data when on 'predictions page'
     public function index(Request $request) {
 
         // getting the current users id for comparsion
         $userId = auth()->id();
 
+
         // 'with' function provides the nested related fields
         $prediction = Prediction::with([
             'user',
-            'reactions'
+            'reactions' => function ($query) use ($userId) {
+                $query->where('user_id', $userId); // filter reactions so only the ones associated with the user_id are displayed
+            }
         ])
             // withCount passes these items in the attributes section of the response as 'additional fields'
             // it knows reaction_type through some sort of laravel magic from the reaction type
@@ -47,8 +68,7 @@ class PredictionController extends Controller {
             ->paginate(10);
 
 
-        //dd($prediction);
-
+        //dd(debug($prediction->toArray()));
         // convert to assoc array so we can process it easier in the tsx file
         $prediction = $prediction->toArray();
 
