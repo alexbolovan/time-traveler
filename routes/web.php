@@ -23,7 +23,7 @@ Route::get('/prediction/{id}', [PredictionController::class, 'show'])->name('pre
 
 // get for debug currently!
 Route::get('/reactions', [ReactionController::class, 'get'])->name('reactions.get');
-Route::post('/reactions', [ReactionController::class, 'update'])->name('reactions.update');
+Route::post('/reactions/update', [ReactionController::class, 'update'])->name('reactions.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

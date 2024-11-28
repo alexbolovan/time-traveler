@@ -35,7 +35,7 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
                     </div>
                     <div className="px-4 pb-2 sm:p-6">{item.body}</div>
                     <Reaction
-                        post_id={item.post_id}
+                        post_id={item.id}
                         user_id={item.reactions[0] ? item.reactions[0].user_id : -1}
                         like_count={item.like_count}
                         dislike_count={item.dislike_count}
