@@ -4,6 +4,7 @@ import {Inertia} from "@inertiajs/inertia";
 
 export default function Reaction({
                                      post_id,
+                                     user_id,
                                      like_count,
                                      dislike_count,
                                      amazed_count,
@@ -11,6 +12,7 @@ export default function Reaction({
                                      curr_reaction,
                                  }: PageProps<{
     post_id: number;
+    user_id: number;
     like_count: number;
     dislike_count: number;
     amazed_count: number;
@@ -31,7 +33,7 @@ export default function Reaction({
     const [toggle, setToggle] = useState(reactions_states);
     const [curr, setCurr] = useState(curr_reaction); // Use state for curr
 
-    const handleToggle = (reaction_type : string) => {
+    const handleToggle = (reaction_type: string) => {
         // If the clicked reaction is already active, reset all reactions
         if (reaction_type === curr) {
             setCurr(null); // Clear the current reaction
@@ -54,12 +56,12 @@ export default function Reaction({
             clown: reaction_type === "clown",
         });
 
+
     }
 
 
-
-return (
-    <div className="flex ml-6 space-x-4 pb-2">
+    return (
+        <div className="flex ml-6 space-x-4 pb-2">
             <span
                 className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
                     toggle.like ? "bg-green-500" : "text-white ring-2 ring-inset ring-gray-200"
@@ -67,43 +69,48 @@ return (
                 onClick={(e) => {
                     handleToggle("like");
                     e.stopPropagation();
+                    Inertia.post(route('reactions.update', {
+                        reaction_type: 'like',
+                        post_id: post_id,
+                        user_id: user_id
+                    }));
                 }}
             >
                 👍 {like_count + (toggle.like ? 1 : 0)}
             </span>
-        <span
-            className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
-                toggle.dislike ? "bg-red-500" : "text-white ring-2 ring-inset ring-gray-200"
-            }`}
-            onClick={(e) => {
-                handleToggle("dislike");
-                e.stopPropagation();
-            }}
-        >
+            <span
+                className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
+                    toggle.dislike ? "bg-red-500" : "text-white ring-2 ring-inset ring-gray-200"
+                }`}
+                onClick={(e) => {
+                    handleToggle("dislike");
+                    e.stopPropagation();
+                }}
+            >
                 👎 {dislike_count + (toggle.dislike ? 1 : 0)}
             </span>
-        <span
-            className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
-                toggle.amazed ? "bg-yellow-500" : "text-white ring-2 ring-inset ring-gray-200"
-            }`}
-            onClick={(e) => {
-                handleToggle("amazed");
-                e.stopPropagation();
-            }}
-        >
+            <span
+                className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
+                    toggle.amazed ? "bg-yellow-500" : "text-white ring-2 ring-inset ring-gray-200"
+                }`}
+                onClick={(e) => {
+                    handleToggle("amazed");
+                    e.stopPropagation();
+                }}
+            >
                 🤯 {amazed_count + (toggle.amazed ? 1 : 0)}
             </span>
-        <span
-            className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
-                toggle.clown ? "bg-blue-500" : "text-white ring-2 ring-inset ring-gray-200"
-            }`}
-            onClick={(e) => {
-                handleToggle("clown");
-                e.stopPropagation();
-            }}
-        >
-                🤡 {clown_count  + (toggle.clown ? 1 : 0)}
+            <span
+                className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
+                    toggle.clown ? "bg-blue-500" : "text-white ring-2 ring-inset ring-gray-200"
+                }`}
+                onClick={(e) => {
+                    handleToggle("clown");
+                    e.stopPropagation();
+                }}
+            >
+                🤡 {clown_count + (toggle.clown ? 1 : 0)}
             </span>
-    </div>
-);
+        </div>
+    );
 }
