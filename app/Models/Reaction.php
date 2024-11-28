@@ -12,7 +12,9 @@ class Reaction extends Model
 
     protected $fillable = [
         'user_id',
-        'reaction_type'
+        'reactionable_id',
+        'reaction_type',
+        'reactionable_type'
     ];
 
 
