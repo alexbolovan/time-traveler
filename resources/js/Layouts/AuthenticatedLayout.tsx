@@ -42,6 +42,7 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/react/20/solid'
+import {Link} from "@inertiajs/react";
 
 const navigation = [
     {name: 'Home', href: '#', icon: HomeIcon, current: false},
@@ -63,7 +64,7 @@ const extra = [
 
 const userNavigation = [
     {name: 'Your profile', href: '#'},
-    {name: 'Sign out', href: '#'},
+    {name: 'Sign out', href: '/logout'},
 ]
 
 function classNames(...classes) {
@@ -353,12 +354,13 @@ export default function AuthenticatedLayout({children}) {
                                     >
                                         {userNavigation.map((item) => (
                                             <MenuItem key={item.name}>
-                                                <a
+                                                <Link
                                                     href={item.href}
+                                                    method="post"
                                                     className="block px-3 py-1 text-sm/6 text-white data-[focus]:bg-gray-800 data-[focus]:outline-none"
                                                 >
                                                     {item.name}
-                                                </a>
+                                                </Link>
                                             </MenuItem>
                                         ))}
                                     </MenuItems>
