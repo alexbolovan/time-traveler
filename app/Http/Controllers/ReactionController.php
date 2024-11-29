@@ -20,18 +20,26 @@ class ReactionController extends Controller
         $postId = $request->input('post_id'); // Expecting the post ID
         $userId = $request->input('user_id'); // Expecting the user ID
 
-        // some intregity violation?
-        // probably has to do with how this fuction is being called?
-        Reaction::updateOrCreate(
-            [
-                'user_id' => auth()->id(), // Always use the authenticated user
-                'reactionable_id' => (int)$postId,
-                'reactionable_type' => 'App\\Models\\Prediction', // If polymorphic
-            ],
-            [
-                'reaction_type' => $reactionType, // Update or create with this value
-            ]
-        );
+        // check if reaction is already exists
+        $same_reaction_exists = Reaction::where('user_id', $userId)->where('reactionable_id', $postId)->where('reaction_type', $reactionType)->count();
+
+        if ($same_reaction_exists == 1) {
+            Reaction::where('user_id', $userId)->where('reactionable_id', $postId)->where('reaction_type', $reactionType)->delete();
+        } else {
+            Reaction::updateOrCreate(
+                [
+                    'user_id' => auth()->id(), // Always use the authenticated user
+                    'reactionable_id' => (int)$postId,
+                    'reactionable_type' => 'App\\Models\\Prediction', // If polymorphic
+                ],
+                [
+                    'reaction_type' => $reactionType, // Update or create with this value
+                ]
+            );
+
+        }
+
+
 
 
 
