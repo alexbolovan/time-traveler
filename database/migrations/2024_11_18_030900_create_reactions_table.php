@@ -20,7 +20,7 @@ return new class extends Migration
             $table->morphs('reactionable');
             $table->string('reaction_type'); // this will need to be verified in the model
 
-            $table->unique(['user_id', 'post_id', 'reaction_type']);
+            $table->unique(['id']);
             $table->timestamps();
 
 

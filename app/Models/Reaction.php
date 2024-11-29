@@ -18,6 +18,7 @@ class Reaction extends Model
     ];
 
 
+
     public function reactionable(): morphTo {
         return $this->morphTo();
     }

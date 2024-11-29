@@ -22,7 +22,6 @@ class ReactionController extends Controller
 
         // some intregity violation?
         // probably has to do with how this fuction is being called?
-        // error :  SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: index 'reactions_user_id_post_id_reaction_type_unique' (Connection: sqlite, SQL: update "reactions" set "reaction_type" = dislike, "updated_at" = 2024-11-28 03:54:00 where "id" = 37)
         Reaction::updateOrCreate(
             [
                 'user_id' => auth()->id(), // Always use the authenticated user
