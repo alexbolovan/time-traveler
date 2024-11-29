@@ -58,13 +58,13 @@ const recent = [
 const extra = [
     {name: 'About', href: '#', icon: QuestionMarkCircleIcon, current: false},
     {name: 'Report Bug', href: '#', icon: BugAntIcon, current: false},
-    {name: 'Github', href: '#', icon: CommandLineIcon, current: false},
+    {name: 'Github', href: 'https://github.com/Axlx16/time-traveler', icon: CommandLineIcon, current: false, target : '_target'},
 ]
 
 
 const userNavigation = [
-    {name: 'Your profile', href: '#'},
-    {name: 'Sign out', href: '/logout'},
+    {name: 'Your profile', href: '#', method: 'get'},
+    {name: 'Sign out', href: '/logout', method: 'post'},
 ]
 
 function classNames(...classes) {
@@ -264,6 +264,8 @@ export default function AuthenticatedLayout({children}) {
                                             <li key={item.name}>
                                                 <a
                                                     href={item.href}
+                                                    target={item.target}
+                                                    rel="noopener noreferrer"
                                                     className={classNames(
                                                         item.current
                                                             ? 'bg-gray-800 text-white'
@@ -356,7 +358,7 @@ export default function AuthenticatedLayout({children}) {
                                             <MenuItem key={item.name}>
                                                 <Link
                                                     href={item.href}
-                                                    method="post"
+                                                    method={item.method}
                                                     className="block px-3 py-1 text-sm/6 text-white data-[focus]:bg-gray-800 data-[focus]:outline-none"
                                                 >
                                                     {item.name}
