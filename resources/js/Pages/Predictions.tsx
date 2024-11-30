@@ -23,7 +23,7 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
     <RenderedComponent>
         {/* Body goes here */}
         {/* We do not render any navigation, but the posts here */}
-        <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto">
+        <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto overflow-x-hidden">
             {/* ERROR: Link inside link here is invalid (error show up as <a> inside <a>) */}
             {predictions.data.map((item: any, index: number) => (
                 //<Link href={route('predictions.show', index + 1)}>

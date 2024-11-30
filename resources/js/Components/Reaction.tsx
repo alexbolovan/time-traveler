@@ -62,7 +62,7 @@ export default function Reaction({
 
 
     return (
-        <div className="flex ml-6 space-x-4 pb-2">
+        <div className={"flex ml-6 space-x-4 pb-2"}>
             <Link
                 className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
                     toggle.like ? "bg-green-500" : "text-white ring-2 ring-inset ring-gray-200"

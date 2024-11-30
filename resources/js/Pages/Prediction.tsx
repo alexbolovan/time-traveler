@@ -6,13 +6,18 @@ import Guest from "@/Layouts/GuestLayout";
 import PredictionCommentDropdown from "@/Components/PredictionCommentDropdown";
 import Reaction from "@/Components/Reaction";
 
-export default function Prediction({auth, prediction, id}: PageProps<{ auth: boolean, prediction: any, id: number }>) {
+export default function Prediction({auth, prediction, comments}: PageProps<{
+    auth: boolean,
+    prediction: any,
+    comments: any
+}>) {
     const RenderedComponent = auth ? Authenticated : Guest;
 
     return (
         <RenderedComponent>
-            {/* Prediction content*/}
+            {/* Prediction content */}
             <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto">
+                {/* Post Section */}
                 <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pt-3 pb-1">
                     <Tags/>
                     <div className="px-4 sm:px-6">
@@ -28,7 +33,6 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
                         amazed_count={prediction.amazed_count}
                         clown_count={prediction.clown_count}
                         curr_reaction={prediction.has_reacted > 0 ? prediction.reactions[0].reaction_type : "none"}
-
                     />
                 </div>
 
@@ -37,29 +41,18 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
                     <PredictionCommentDropdown/>
                 </div>
 
-                {/* Displaying comments */}
-
-                {/*
-                <div className="flex-col space-y-2 pb-6">
-                    <h2 className="underline">Comments</h2>
-                    <ul>
-                        {prediction.comments.map((comment: string, index: number) => (
-                            <div className="flex-col space-y-4">
-                                {!comment.parent_id ?
-                                    <li key={index}>
-                                        <p>Comment: {comment.body}</p>
-                                        {comment.comments.map((subcomment: string, index: number) => (
-                                            <p>Subcomment: {subcomment.body}</p>
-                                        ))}
-                                    </li>
-                                    : null
-                                }
-
-                            </div>
-                        ))}
-                    </ul>
+                {/* Comments Section */}
+                <div className="flex flex-col space-y-6">
+                    {comments.comments.map((comment: any, index: number) => (
+                        <div
+                            key={index}
+                            className="overflow-hidden rounded-lg bg-transparent shadow border border-white pb-1"
+                        >
+                            <div className="px-4 pb-2 sm:p-6">{comment.body}</div>
+                            <Reaction/>
+                        </div>
+                    ))}
                 </div>
-                */}
             </div>
         </RenderedComponent>
     )
