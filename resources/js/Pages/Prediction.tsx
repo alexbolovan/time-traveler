@@ -3,6 +3,7 @@ import predictions from "@/Pages/Predictions";
 import Tags from "@/Components/Tags";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Guest from "@/Layouts/GuestLayout";
+import PredictionCommentDropdown from "@/Components/PredictionCommentDropdown";
 
 export default function Prediction({auth, prediction, id}: PageProps<{ auth: boolean, prediction: any, id: number }>) {
     const RenderedComponent = auth ? Authenticated : Guest;
@@ -10,18 +11,22 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
     return (
         <RenderedComponent>
             {/* Prediction content*/}
-            <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pt-3 pb-1">
-                <Tags/>
-                <div className="px-4 sm:px-6">
-                    <p className="text-2xl mb-1">{prediction.title}</p>
-                    <p className="text-sm hover:underline">{prediction.user.name}</p>
+            <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto ">
+                <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pt-3 pb-1">
+                    <Tags/>
+                    <div className="px-4 sm:px-6">
+                        <p className="text-2xl mb-1">{prediction.title}</p>
+                        <p className="text-sm hover:underline">{prediction.user.name}</p>
+                    </div>
+                    <div className="px-4 pb-2 sm:p-6">{prediction.body}</div>
                 </div>
-                <div className="px-4 pb-2 sm:p-6">{prediction.body}</div>
-            </div>
 
-            {/* Filter options */}
+                {/* Filter options */}
+                <div className="py-4">
+                    <PredictionCommentDropdown/>
+                </div>
 
-
+                {/*
                 <div className="flex-col space-y-2 pb-6">
                     <h2 className="underline">Comments</h2>
                     <ul>
@@ -31,15 +36,17 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
                                     <li key={index}>
                                         <p>Comment: {comment.body}</p>
                                         {comment.comments.map((subcomment: string, index: number) => (
-                                        <p>Subcomment: {subcomment.body}</p>
-                                    ))}
-                                </li>
-                                : null
-                            }
+                                            <p>Subcomment: {subcomment.body}</p>
+                                        ))}
+                                    </li>
+                                    : null
+                                }
 
-                        </div>
-                    ))}
-                </ul>
+                            </div>
+                        ))}
+                    </ul>
+                </div>
+                */}
             </div>
         </RenderedComponent>
     )
