@@ -4,6 +4,7 @@ import Tags from "@/Components/Tags";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import Guest from "@/Layouts/GuestLayout";
 import PredictionCommentDropdown from "@/Components/PredictionCommentDropdown";
+import Reaction from "@/Components/Reaction";
 
 export default function Prediction({auth, prediction, id}: PageProps<{ auth: boolean, prediction: any, id: number }>) {
     const RenderedComponent = auth ? Authenticated : Guest;
@@ -19,12 +20,24 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
                         <p className="text-sm hover:underline">{prediction.user.name}</p>
                     </div>
                     <div className="px-4 pb-2 sm:p-6">{prediction.body}</div>
+                    <Reaction
+                        post_id={prediction.id}
+                        user_id={prediction.reactions[0] ? prediction.reactions[0].user_id : -1}
+                        like_count={prediction.like_count}
+                        dislike_count={prediction.dislike_count}
+                        amazed_count={prediction.amazed_count}
+                        clown_count={prediction.clown_count}
+                        curr_reaction={prediction.has_reacted > 0 ? prediction.reactions[0].reaction_type : "none"}
+
+                    />
                 </div>
 
                 {/* Filter options */}
                 <div className="py-4">
                     <PredictionCommentDropdown/>
                 </div>
+
+                {/* */}
 
                 {/*
                 <div className="flex-col space-y-2 pb-6">
