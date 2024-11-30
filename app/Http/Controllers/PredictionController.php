@@ -27,8 +27,8 @@ class PredictionController extends Controller {
         });
 
 
-
     }
+
     // get data when on 'predictions page'
     public function index(Request $request) {
 
@@ -47,7 +47,7 @@ class PredictionController extends Controller {
             // it knows reaction_type through some sort of laravel magic from the reaction type
             // the long form way of doing this would be to use the query-builder and build it from scratch, ie (select, join, ...)
             // NOTE all these 'fields' (ie like_count) can be accessed at the top level with item.{field}
-                // the actual schema by dd is misleading
+            // the actual schema by dd is misleading
             ->withCount([
                 'reactions as like_count' => function ($query) {
                     $query->where('reaction_type', 'like');
@@ -80,45 +80,50 @@ class PredictionController extends Controller {
 
     // get data when on specific post
     public function show(Request $request, $post_id) {
-            // this might be querying too much info that we do not need
-            $user_id = auth()->id();
-            $prediction = Prediction::with([
-                'user',
-                'reactions' => function ($query) use ($user_id) {
-                    $query->where('user_id', $user_id); // filter reactions so only the ones associated with the user_id are displayed
+        // this might be querying too much info that we do not need
+        $user_id = auth()->id();
+        $prediction = Prediction::with([
+            'user',
+            'reactions' => function ($query) use ($user_id) {
+                $query->where('user_id', $user_id); // filter reactions so only the ones associated with the user_id are displayed
+            },
+        ])
+            // withCount passes these items in the attributes section of the response as 'additional fields'
+            // it knows reaction_type through some sort of laravel magic from the reaction type
+            // the long form way of doing this would be to use the query-builder and build it from scratch, ie (select, join, ...)
+            // NOTE all these 'fields' (ie like_count) can be accessed at the top level with item.{field}
+            // the actual schema by dd is misleading
+            ->withCount([
+                'reactions as like_count' => function ($query) {
+                    $query->where('reaction_type', 'like');
+                },
+                'reactions as dislike_count' => function ($query) {
+                    $query->where('reaction_type', 'dislike');
+                },
+                'reactions as amazed_count' => function ($query) {
+                    $query->where('reaction_type', 'amazed');
+                },
+                'reactions as clown_count' => function ($query) {
+                    $query->where('reaction_type', 'clown');
+                },
+                'reactions as has_reacted' => function ($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
                 }
-            ])
-                // withCount passes these items in the attributes section of the response as 'additional fields'
-                // it knows reaction_type through some sort of laravel magic from the reaction type
-                // the long form way of doing this would be to use the query-builder and build it from scratch, ie (select, join, ...)
-                // NOTE all these 'fields' (ie like_count) can be accessed at the top level with item.{field}
-                // the actual schema by dd is misleading
-                ->withCount([
-                    'reactions as like_count' => function ($query) {
-                        $query->where('reaction_type', 'like');
-                    },
-                    'reactions as dislike_count' => function ($query) {
-                        $query->where('reaction_type', 'dislike');
-                    },
-                    'reactions as amazed_count' => function ($query) {
-                        $query->where('reaction_type', 'amazed');
-                    },
-                    'reactions as clown_count' => function ($query) {
-                        $query->where('reaction_type', 'clown');
-                    },
-                    'reactions as has_reacted' => function ($query) use ($user_id) {
-                        $query->where('user_id', $user_id);
-                    }
-                ])->findOrFail($post_id); // filter results by the id of Predictions
+            ])->findOrFail($post_id); // filter results by the id of Predictions
 
-            $prediction = $prediction->toArray();
 
-            //dd($prediction);
+        $comments = Prediction::with([
+            'comments'
+        ])->find($post_id);
 
-            return Inertia::render("Prediction", [
-                'prediction' => $prediction,
-                'id' => $post_id,
-                'auth' => Auth::user()
-            ]);
-        }
+        $prediction = $prediction->toArray();
+        $comments = $comments->toArray();
+
+        //dd(debug($comments));
+
+        return Inertia::render("Prediction", [
+            'prediction' => $prediction,
+            'comments' => $comments
+        ]);
+    }
 }

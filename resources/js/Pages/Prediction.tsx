@@ -12,7 +12,7 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
     return (
         <RenderedComponent>
             {/* Prediction content*/}
-            <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto ">
+            <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto">
                 <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pt-3 pb-1">
                     <Tags/>
                     <div className="px-4 sm:px-6">
@@ -37,7 +37,7 @@ export default function Prediction({auth, prediction, id}: PageProps<{ auth: boo
                     <PredictionCommentDropdown/>
                 </div>
 
-                {/* */}
+                {/* Displaying comments */}
 
                 {/*
                 <div className="flex-col space-y-2 pb-6">
