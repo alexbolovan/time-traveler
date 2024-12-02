@@ -49,7 +49,17 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                             <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pb-1">
                                 <div className="text-sm px-4 pl-6 pt-3 pb-1">{comment.user.name}</div>
                                 <div className="px-4 pl-6 pb-6">{comment.body}</div>
-                                <Reaction/>
+                                <Reaction
+                                    post_id={comment.id}
+                                    user_id={comment.reactions[0] ? comment.reactions[0].user_id : -1}
+                                    like_count={comment.like_count}
+                                    dislike_count={comment.dislike_count}
+                                    amazed_count={comment.amazed_count}
+                                    clown_count={comment.clown_count}
+                                    curr_reaction={comment.has_reacted > 0 ? comment.reactions[0].reaction_type : "none"}
+                                    type="Comment"
+
+                                />
                             </div>
 
                             {/* Children comments container */}
@@ -62,7 +72,15 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                                         >
                                             <p className="text-sm px-4 pl-6 pt-3 pb-1">{child.user.name}</p>
                                             <p className="px-4 pl-6 pb-6">{child.body}</p>
-                                            <Reaction/>
+                                            <Reaction
+                                                post_id={child.id}
+                                                user_id={child.reactions[0] ? child.reactions[0].user_id : -1}
+                                                like_count={child.like_count}
+                                                dislike_count={child.dislike_count}
+                                                amazed_count={child.amazed_count}
+                                                clown_count={child.clown_count}
+                                                curr_reaction={child.has_reacted > 0 ? child.reactions[0].reaction_type : "none"}
+                                            />
                                         </div>
                                     ))}
                                 </div>

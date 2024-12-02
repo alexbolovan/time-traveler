@@ -11,6 +11,7 @@ export default function Reaction({
                                      amazed_count,
                                      clown_count,
                                      curr_reaction,
+                                     type,
                                  }: PageProps<{
     post_id: number;
     user_id: number;
@@ -19,6 +20,7 @@ export default function Reaction({
     amazed_count: number;
     clown_count: number;
     curr_reaction: string | null;
+    type: string | null;
 }>) {
 
     let reactions_states = {
@@ -78,7 +80,8 @@ export default function Reaction({
                 data={{
                     reaction_type: 'like',
                     post_id: post_id,
-                    user_id: user_id
+                    user_id: user_id,
+                    type: type
                 }}
             >
                 👍 {like_count}
@@ -97,6 +100,7 @@ export default function Reaction({
                     reaction_type: 'dislike',
                     post_id: post_id,
                     user_id: user_id,
+                    type: type
                 }}
             >
                 👎 {dislike_count}
@@ -115,9 +119,10 @@ export default function Reaction({
                     reaction_type: 'amazed',
                     post_id: post_id,
                     user_id: user_id,
+                    type: type
                 }}
             >
-                🤯 {amazed_count }
+                🤯 {amazed_count}
             </Link>
             <Link
                 className={`inline-flex items-center gap-x-2 rounded-full px-4 py-2 text-sm font-medium ${
@@ -133,9 +138,10 @@ export default function Reaction({
                     reaction_type: 'clown',
                     post_id: post_id,
                     user_id: user_id,
+                    type: type
                 }}
             >
-                🤡 {clown_count }
+                🤡 {clown_count}
             </Link>
 
         </div>
