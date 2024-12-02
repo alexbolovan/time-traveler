@@ -48,7 +48,9 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                             key={index}
                             className="overflow-hidden rounded-lg bg-transparent shadow border border-white pb-1"
                         >
-                            <div className="px-4 pb-2 sm:p-6">{comment.body}</div>
+                            <div className="text-sm px-4 pl-6 py-3">{comment.user.name}</div>
+                            <div className="text-xl px-4 pl-6 pb-6">{comment.body}</div>
+
                             <Reaction/>
                         </div>
                     ))}

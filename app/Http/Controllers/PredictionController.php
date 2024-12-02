@@ -113,7 +113,8 @@ class PredictionController extends Controller {
 
 
         $comments = Prediction::with([
-            'comments'
+            'comments.user',
+
         ])->find($post_id);
 
         $prediction = $prediction->toArray();
