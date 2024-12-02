@@ -34,4 +34,5 @@ class Prediction extends Model
 
 
 
+
 }

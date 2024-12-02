@@ -33,4 +33,8 @@ class Comment extends Model
         return $this->morphMany(Reaction::class, 'reactionable');
     }
 
+    public function children() : HasMany {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
+
 }

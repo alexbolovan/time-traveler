@@ -114,6 +114,7 @@ class PredictionController extends Controller {
 
         $comments = Prediction::with([
             'comments.user',
+            'comments.children.user'
 
         ])->find($post_id);
 

@@ -44,17 +44,30 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                 {/* Comments Section */}
                 <div className="flex flex-col space-y-6">
                     {comments.comments.map((comment: any, index: number) => (
-                        <div
-                            key={index}
-                            className="overflow-hidden rounded-lg bg-transparent shadow border border-white pb-1"
-                        >
-                            <div className="text-sm px-4 pl-6 py-3">{comment.user.name}</div>
-                            <div className="text-xl px-4 pl-6 pb-6">{comment.body}</div>
+                        <div className="space-y-4" key={index}>
+                            {/* Parent comment container */}
+                            <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pb-1">
+                                <div className="text-sm px-4 pl-6 pt-3 pb-1">{comment.user.name}</div>
+                                <div className="px-4 pl-6 pb-6">{comment.body}</div>
+                                <Reaction/>
+                            </div>
 
-                            <Reaction/>
+                            {/* Children comments container */}
+                            <div className="ml-8 space-y-4">
+                                {comment.children.map((child: any, childIndex: number) => (
+                                    <div
+                                        key={childIndex}
+                                        className="rounded-lg bg-transparent shadow border border-gray-300 p-4"
+                                    >
+                                        <p className="text-sm">{child.user.name}</p>
+                                        <p className="text-md">{child.body}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     ))}
                 </div>
+
             </div>
         </RenderedComponent>
     )
