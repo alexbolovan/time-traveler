@@ -109,19 +109,38 @@ class PredictionController extends Controller {
                 'reactions as has_reacted' => function ($query) use ($user_id) {
                     $query->where('user_id', $user_id);
                 }
-            ])->findOrFail($post_id); // filter results by the id of Predictions
+            ])->find($post_id); // filter results by the id of Predictions
 
 
         $comments = Prediction::with([
             'comments.user',
-            'comments.children.user'
+            'comments.reactions',
+            'comments.children.user',
+            'comments.children.reactions'
+
+        ])->withCount([
+            'reactions as like_count' => function ($query) {
+                $query->where('reaction_type', 'like');
+            },
+            'reactions as dislike_count' => function ($query) {
+                $query->where('reaction_type', 'dislike');
+            },
+            'reactions as amazed_count' => function ($query) {
+                $query->where('reaction_type', 'amazed');
+            },
+            'reactions as clown_count' => function ($query) {
+                $query->where('reaction_type', 'clown');
+            },
+            'reactions as has_reacted' => function ($query) use ($user_id) {
+                $query->where('user_id', $user_id);
+            }
 
         ])->find($post_id);
 
         $prediction = $prediction->toArray();
         $comments = $comments->toArray();
 
-        //dd(debug($comments));
+        dd(debug($comments));
 
         return Inertia::render("Prediction", [
             'prediction' => $prediction,

@@ -53,17 +53,20 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                             </div>
 
                             {/* Children comments container */}
-                            <div className="ml-8 space-y-4">
-                                {comment.children.map((child: any, childIndex: number) => (
-                                    <div
-                                        key={childIndex}
-                                        className="rounded-lg bg-transparent shadow border border-gray-300 p-4"
-                                    >
-                                        <p className="text-sm">{child.user.name}</p>
-                                        <p className="text-md">{child.body}</p>
-                                    </div>
-                                ))}
-                            </div>
+                            {Object.keys(comment.children).length !== 0 ?
+                                <div className="ml-8 pt-2 space-y-6">
+                                    {comment.children.map((child: any, childIndex: number) => (
+                                        <div
+                                            key={childIndex}
+                                            className="rounded-lg bg-transparent shadow border border-white"
+                                        >
+                                            <p className="text-sm px-4 pl-6 pt-3 pb-1">{child.user.name}</p>
+                                            <p className="px-4 pl-6 pb-6">{child.body}</p>
+                                            <Reaction/>
+                                        </div>
+                                    ))}
+                                </div>
+                                : null}
                         </div>
                     ))}
                 </div>

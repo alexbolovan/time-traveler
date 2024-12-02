@@ -45,7 +45,7 @@ import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/react/20/solid'
 import {Link} from "@inertiajs/react";
 
 const navigation = [
-    {name: 'Home', href: '#', icon: HomeIcon, current: false},
+    {name: 'Home', href: '/predictions', icon: HomeIcon, current: false},
     {name: 'Popular', href: '#', icon: SparklesIcon, current: false},
     {name: 'New', href: '#', icon: ClockIcon, current: false},
 ]
