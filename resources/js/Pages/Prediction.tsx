@@ -80,6 +80,7 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                                                 amazed_count={child.amazed_count}
                                                 clown_count={child.clown_count}
                                                 curr_reaction={child.has_reacted > 0 ? child.reactions[0].reaction_type : "none"}
+                                                type="Comment"
                                             />
                                         </div>
                                     ))}
