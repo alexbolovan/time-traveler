@@ -12,11 +12,11 @@ class ReactionController extends Controller {
 
     public function update(Request $request) {
 
-        //dd($request->all());
         $reactionType = $request->input('reaction_type'); // Expecting 'like'
         $reactionableId = $request->input('post_id'); // Expecting the post ID
         $userId = $request->input('user_id'); // Expecting the user ID
         $reactionableType = $request->input('type');
+
 
 
             // check if reaction is already exists
