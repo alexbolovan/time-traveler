@@ -83,6 +83,7 @@ export default function Reaction({
                     user_id: user_id,
                     type: type
                 }}
+                preserveScroll={true}
             >
                 👍 {like_count}
             </Link>
@@ -102,6 +103,7 @@ export default function Reaction({
                     user_id: user_id,
                     type: type
                 }}
+                preserveScroll={true}
             >
                 👎 {dislike_count}
             </Link>
@@ -121,6 +123,7 @@ export default function Reaction({
                     user_id: user_id,
                     type: type
                 }}
+                preserveScroll={true}
             >
                 🤯 {amazed_count}
             </Link>
@@ -140,6 +143,7 @@ export default function Reaction({
                     user_id: user_id,
                     type: type
                 }}
+                preserveScroll={true}
             >
                 🤡 {clown_count}
             </Link>

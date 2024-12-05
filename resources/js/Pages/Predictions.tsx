@@ -28,7 +28,7 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
             {predictions.data.map((item: any, index: number) => (
                 //<Link href={route('predictions.show', index + 1)}>
                 <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pt-3 pb-1 hover:cursor-pointer"
-                     onClick={() => LoadPost(item.id)}>
+                     onClick={() => LoadPost(item.id)} key={index}>
                     <Tags/>
                     <div className="px-4 sm:px-6">
                         <p className="text-2xl mb-1">{item.title}</p>
