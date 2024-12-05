@@ -168,4 +168,7 @@ class PredictionController extends Controller {
             'comments' => $comments
         ]);
     }
+
+
+
 }

@@ -25,6 +25,8 @@ Route::get('/prediction/{id}', [PredictionController::class, 'show'])->name('pre
 Route::get('/reactions', [ReactionController::class, 'get'])->name('reactions.get');
 Route::post('/reactions/update', [ReactionController::class, 'update'])->name('reactions.update');
 
+Route::get('/user', [ProfileController::class, 'user'])->name('profile.user');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
