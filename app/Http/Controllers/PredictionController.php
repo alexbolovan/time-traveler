@@ -170,5 +170,10 @@ class PredictionController extends Controller {
     }
 
 
+    public function create(Request $request) {
+        return Inertia::render("Create", []);
+    }
+
+
 
 }

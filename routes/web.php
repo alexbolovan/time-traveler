@@ -19,9 +19,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/predictions', [PredictionController::class, 'index'])->name('predictions.index');
+Route::get('/predictions/create', [PredictionController::class, 'create'])->name('predictions.create');
+Route::post('/predictions/submit', [PredictionController::class, 'submit'])->name('predictions.submit');
+
 Route::get('/prediction/{id}', [PredictionController::class, 'show'])->name('predictions.show');
 
-// get for debug currently!
 Route::get('/reactions', [ReactionController::class, 'get'])->name('reactions.get');
 Route::post('/reactions/update', [ReactionController::class, 'update'])->name('reactions.update');
 
