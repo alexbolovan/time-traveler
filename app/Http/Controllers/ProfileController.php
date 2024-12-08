@@ -82,11 +82,11 @@ class ProfileController extends Controller {
 
         // getting all predictions + comments and sorting them in order of most recent
         $interactions = DB::select("
-        SELECT id, user_id, created_at, 'prediction' AS type
+        SELECT id, title, body, user_id, created_at, 'prediction' AS type
         FROM predictions
         WHERE user_id = ?
         UNION ALL
-        SELECT id, user_id, created_at, 'comment' AS type
+        SELECT id, NULL as title, body, user_id, created_at, 'comment' AS type
         FROM comments
         WHERE user_id = ?
         ORDER BY created_at DESC",

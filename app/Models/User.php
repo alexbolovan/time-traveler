@@ -59,20 +59,5 @@ class User extends Authenticatable
         return $this->hasMany(Reaction::class);
     }
 
-    public function getUserInteractions($user_id)
-    {
-        // Fetch predictions and comments directly
-        $predictions = Prediction::where('user_id', $user_id)->get();
-        $comments = Comment::where('user_id', $user_id)->get();
-
-        // Combine and sort by created_at
-        $interactions = $predictions
-            ->concat($comments) // Combine the two collections
-            ->sortByDesc('created_at') // Sort by `created_at`
-            ->values(); // Reset array keys
-
-        // Return the combined data
-        return response()->json($interactions);
-    }
 
 }
