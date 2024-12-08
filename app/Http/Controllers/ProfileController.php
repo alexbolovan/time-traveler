@@ -9,12 +9,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ProfileController extends Controller
-{
+class ProfileController extends Controller {
     public function debug($prediction) {
         $fields = collect($prediction->items())->map(function ($item) {
             return [
@@ -32,8 +32,7 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): Response
-    {
+    public function edit(Request $request): Response {
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
@@ -43,8 +42,7 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
+    public function update(ProfileUpdateRequest $request): RedirectResponse {
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -59,8 +57,7 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
-    {
+    public function destroy(Request $request): RedirectResponse {
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
@@ -81,16 +78,29 @@ class ProfileController extends Controller
         // user_name
         // paginate most recent comments and posts
         $user_profile = User::with([
-            'predictions',
-            'comments'
         ])->find($user_id);
 
-        $user_profile = $user_profile->toArray();
+        // getting all predictions + comments and sorting them in order of most recent
+        $interactions = DB::select("
+        SELECT id, user_id, created_at, 'prediction' AS type
+        FROM predictions
+        WHERE user_id = ?
+        UNION ALL
+        SELECT id, user_id, created_at, 'comment' AS type
+        FROM comments
+        WHERE user_id = ?
+        ORDER BY created_at DESC",
+            [$user_id, $user_id]);
 
-        //dd($user_profile);
+        $user_profile->interactions = $interactions;
 
-        Return Inertia::render("User", [
-            'profile' => $user_profile
+
+        //dd($user_profile->toArray());
+
+        // Combine predictions and comments
+        return Inertia::render("User", [
+            'profile' => $user_profile,
+            'auth' => Auth::user()
         ]);
     }
 }
