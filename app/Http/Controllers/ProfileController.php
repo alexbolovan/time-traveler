@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Comment;
 use App\Models\Prediction;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -77,8 +78,23 @@ class ProfileController extends Controller {
     public function user(Request $request, $user_id) {
         // user_name
         // paginate most recent comments and posts
-        $user_profile = User::with([
-        ])->find($user_id);
+        $user_profile = User::with([])->find($user_id);
+
+        $predictions_reaction_count = DB::table('reactions')
+            ->where('reactionable_id', $user_id)
+            ->where('reactionable_type', Prediction::class)
+            ->count();
+
+        $comments_reaction_count = DB::table('reactions')
+            ->where('reactionable_id', $user_id) // Replace $prediction_id with the actual ID
+            ->where('reactionable_type', Comment::class)
+            ->count();
+
+        $user_profile->predictions_reactions_count = $predictions_reaction_count;
+        $user_profile->comments_reactions_count = $comments_reaction_count;
+
+
+
 
         // getting all predictions + comments and sorting them in order of most recent
         $interactions = DB::select("
@@ -95,7 +111,7 @@ class ProfileController extends Controller {
         $user_profile->interactions = $interactions;
 
 
-        //dd($user_profile->toArray());
+        dd($user_profile->toArray());
 
         // Combine predictions and comments
         return Inertia::render("User", [
