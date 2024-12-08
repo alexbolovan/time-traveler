@@ -170,8 +170,14 @@ class PredictionController extends Controller {
     }
 
 
+    // load view for creating a new post
     public function create(Request $request) {
         return Inertia::render("Create", []);
+    }
+
+    // update the database with a new post
+    public function submit(Request $request) {
+        dd("Here");
     }
 
 
