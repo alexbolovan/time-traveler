@@ -1,9 +1,10 @@
+import {PageProps} from "@/types";
 
-export default function User() {
+export default function User({profile} : PageProps<{profile : any}>) {
 
     return (
         <>
-            <p>Hello World!</p>
+            <p>{profile.name}</p>
         </>
     )
 }
