@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
 use Illuminate\Support\Facades\Auth;
@@ -65,13 +66,12 @@ class PredictionController extends Controller {
                     $query->where('user_id', $userId);
                 }
             ])
+            ->where('reveal_date', '<=', Carbon::now()->toDateTimeString())
+            ->orderBy('reveal_date', 'desc')
             ->paginate(10);
-
-
         //dd(debug($prediction->toArray()));
         // convert to assoc array so we can process it easier in the tsx file
         $prediction = $prediction->toArray();
-
         return Inertia::render('Predictions', [
             'predictions' => $prediction,
             'auth' => Auth::user()
@@ -177,7 +177,14 @@ class PredictionController extends Controller {
 
     // update the database with a new post
     public function submit(Request $request) {
-        dd("Here");
+        Prediction::create([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'user_id' => auth()->id(),
+            'reveal_date' => $request->get('reveal_date'),
+        ]);
+
+        return redirect('/predictions');
     }
 
 

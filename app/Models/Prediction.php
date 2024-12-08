@@ -15,7 +15,9 @@ class Prediction extends Model
     use HasFactory, Notifiable;
     protected $fillable = [
         'title',
-        'body'
+        'body',
+        'user_id',
+        'reveal_date'
     ];
 
     public function user() : BelongsTo {
