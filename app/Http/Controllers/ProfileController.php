@@ -111,7 +111,7 @@ class ProfileController extends Controller {
         $user_profile->interactions = $interactions;
 
 
-        dd($user_profile->toArray());
+        //dd($user_profile->toArray());
 
         // Combine predictions and comments
         return Inertia::render("User", [

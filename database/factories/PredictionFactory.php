@@ -19,6 +19,7 @@ class PredictionFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'body' => $this->faker->paragraph(),
+            'reveal_date' => $this->faker->date(),
             'user_id' => $this->faker->numberBetween(1, 5)
             ];
     }
