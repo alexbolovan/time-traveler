@@ -15,6 +15,7 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
 
     return (
         <RenderedComponent>
+            {auth ? <p>Hello world </p> : <p>Bye World!</p> }
             {/* Prediction content */}
             <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto">
                 {/* Post Section */}

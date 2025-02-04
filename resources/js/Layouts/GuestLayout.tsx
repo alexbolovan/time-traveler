@@ -312,12 +312,12 @@ export default function AuthenticatedLayout({children}) {
                                 />
                             </form>
                             <div className="flex items-center gap-x-4 lg:gap-x-6">
-                                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                                <Link className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500" href={'/login'}>
                                 Log in
-                                </button>
-                                <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+                                </Link>
+                                <Link className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500" href={'/register'}>
                                 Register
-                                </button>
+                                </Link>
 
                             </div>
                         </div>

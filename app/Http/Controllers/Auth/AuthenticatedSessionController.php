@@ -47,6 +47,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/predictions');
+        return redirect()->intended(route('predictions.index', absolute: false));
     }
 }

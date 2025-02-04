@@ -73,13 +73,14 @@ export default function Reaction({
                 }`}
                 onClick={(e) => {
                     if (auth) {
+                        console.log("Hello World!");
                         handleToggle("like");
                         e.stopPropagation();
                     }
 
                 }}
 
-                href={auth ? `/reactions/update` : '/register'}
+                href={auth ? `/reactions/update` : ''}
                 method={auth ? "post" : "get"}
                 data={{
                     reaction_type: 'like',
