@@ -44,6 +44,7 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
                         clown_count={item.clown_count}
                         curr_reaction={item.has_reacted > 0 ? item.reactions[0].reaction_type : "none"}
                         type="Prediction"
+                        auth={auth}
                     />
                     {/* there should never be more than 1, but just in case we just grab the first one */}
                 </div>

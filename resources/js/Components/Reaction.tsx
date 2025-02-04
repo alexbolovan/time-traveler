@@ -12,6 +12,7 @@ export default function Reaction({
                                      clown_count,
                                      curr_reaction,
                                      type,
+                                     auth,
                                  }: PageProps<{
     post_id: number;
     user_id: number;
@@ -21,6 +22,7 @@ export default function Reaction({
     clown_count: number;
     curr_reaction: string | null;
     type: string | null;
+    auth: boolean
 }>) {
 
     let reactions_states = {
@@ -70,13 +72,15 @@ export default function Reaction({
                     toggle.like ? "bg-green-500" : "text-white ring-2 ring-inset ring-gray-200"
                 }`}
                 onClick={(e) => {
-                    handleToggle("like");
-                    e.stopPropagation();
+                    if (auth) {
+                        handleToggle("like");
+                        e.stopPropagation();
+                    }
 
                 }}
 
-                href={`/reactions/update`}
-                method="post"
+                href={auth ? `/reactions/update` : '/register'}
+                method={auth ? "post" : "get"}
                 data={{
                     reaction_type: 'like',
                     post_id: post_id,

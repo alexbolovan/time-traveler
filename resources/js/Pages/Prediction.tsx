@@ -34,6 +34,7 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                         clown_count={prediction.clown_count}
                         curr_reaction={prediction.has_reacted > 0 ? prediction.reactions[0].reaction_type : "none"}
                         type="Prediction"
+                        auth={auth}
                     />
                 </div>
 
