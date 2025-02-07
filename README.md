@@ -2,7 +2,7 @@
 ## Time Travaler
 
 <p align="center">
-  <img src="https://github.com/alexbolovan/time-traveler/blob/main/docs/time-traveler.png" width="512" height="350" align="center">
+  <img src="https://github.com/alexbolovan/time-traveler/blob/main/docs/time-traveler.png" width="600" height="350" align="center">
 </p>
 
 - Developed a full-stack web application enabling users to make predictions on upcoming events within public or private communities  
