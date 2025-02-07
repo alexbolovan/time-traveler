@@ -36,9 +36,9 @@ const navigation = [
     {name: 'New', href: '#', icon: ClockIcon, current: false},
 ]
 const recent = [
-    {id: 1, name: 'Recent 1', href: '#', initial: 'T1', current: false},
-    {id: 2, name: 'Recent 2', href: '#', initial: 'T2', current: false},
-    {id: 3, name: 'Recent 3', href: '#', initial: 'T3', current: false},
+    //{id: 1, name: 'Recent 1', href: '#', initial: 'T1', current: false},
+    //{id: 2, name: 'Recent 2', href: '#', initial: 'T2', current: false},
+    //{id: 3, name: 'Recent 3', href: '#', initial: 'T3', current: false},
 ]
 
 const extra = [
@@ -125,30 +125,6 @@ export default function AuthenticatedLayout({children}) {
                                             </ul>
                                         </li>
                                         <li>
-                                            <div className="text-xs/6 font-semibold text-gray-400">Recent Posts</div>
-                                            <ul role="list" className="-mx-2 mt-2 space-y-1">
-                                                {recent.map((team) => (
-                                                    <li key={team.name}>
-                                                        <a
-                                                            href={team.href}
-                                                            className={classNames(
-                                                                team.current
-                                                                    ? 'bg-gray-800 text-white'
-                                                                    : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                                                            )}
-                                                        >
-                              <span
-                                  className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                                {team.initial}
-                              </span>
-                                                            <span className="truncate">{team.name}</span>
-                                                        </a>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </li>
-                                        <li>
                                             <ul role="list" className="-mx-2 space-y-1">
                                                 <div className="text-xs/6 font-semibold text-gray-400">Recent Posts</div>
                                                 {extra.map((item) => (
@@ -220,32 +196,8 @@ export default function AuthenticatedLayout({children}) {
                                     </ul>
                                 </li>
                                 <li>
-                                    <div className="text-xs/6 font-semibold text-gray-400">Recent Posts</div>
-                                    <ul role="list" className="-mx-2 mt-2 space-y-1">
-                                        {recent.map((team) => (
-                                            <li key={team.name}>
-                                                <a
-                                                    href={team.href}
-                                                    className={classNames(
-                                                        team.current
-                                                            ? 'bg-gray-800 text-white'
-                                                            : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                        'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                                                    )}
-                                                >
-                          <span
-                              className="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                            {team.initial}
-                          </span>
-                                                    <span className="truncate">{team.name}</span>
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </li>
-                                <li>
                                     <div className="text-xs/6 font-semibold text-gray-400">Extras</div>
-                                    <ul role="list" className="-mx-2 mt-2 space-y-1">
+                                    <ul role="list" className="-mx-2 mt-1 space-y-1">
                                         {extra.map((item) => (
                                             <li key={item.name}>
                                                 <a

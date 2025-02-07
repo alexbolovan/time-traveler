@@ -6,6 +6,12 @@ use App\Models\Prediction;
 use App\Models\Reaction;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class ReactionController extends Controller {
 
@@ -47,6 +53,10 @@ class ReactionController extends Controller {
         }
 
 
+    }
+
+    public function redirect(Request $request) {
+        return Redirect::route('register'); 
     }
 
 

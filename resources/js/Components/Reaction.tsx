@@ -13,6 +13,7 @@ export default function Reaction({
                                      curr_reaction,
                                      type,
                                      auth,
+                                     redirect
                                  }: PageProps<{
     post_id: number;
     user_id: number;
@@ -22,7 +23,8 @@ export default function Reaction({
     clown_count: number;
     curr_reaction: string | null;
     type: string | null;
-    auth: boolean
+    auth: boolean;
+    redirect: boolean;
 }>) {
 
     let reactions_states = {
@@ -80,8 +82,8 @@ export default function Reaction({
 
                 }}
 
-                href={auth ? `/reactions/update` : ''}
-                method={auth ? "post" : "get"}
+                href={auth && redirect ? `/reactions/update` : '/register'}
+                method={auth && redirect ? "post" : "get"}
                 data={{
                     reaction_type: 'like',
                     post_id: post_id,

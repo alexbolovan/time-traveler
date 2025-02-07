@@ -73,6 +73,7 @@ class PredictionController extends Controller {
         // convert to assoc array so we can process it easier in the tsx file
         $prediction = $prediction->toArray();
         return Inertia::render('Predictions', [
+            'auth' => is_null($userId) ? false : true,
             'predictions' => $prediction,
             'auth' => Auth::user()
         ]);
@@ -82,6 +83,7 @@ class PredictionController extends Controller {
     public function show(Request $request, $post_id) {
         // this might be querying too much info that we do not need
         $user_id = auth()->id();
+        //dd($user_id);
         $prediction = Prediction::with([
             'user',
             'reactions' => function ($query) use ($user_id) {
@@ -164,6 +166,7 @@ class PredictionController extends Controller {
         //dd(debug($comments));
 
         return Inertia::render("Prediction", [
+            'auth' => is_null($user_id) ? false : true,
             'prediction' => $prediction,
             'comments' => $comments
         ]);

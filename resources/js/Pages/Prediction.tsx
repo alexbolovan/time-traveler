@@ -15,12 +15,10 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
 
     return (
         <RenderedComponent>
-            {auth ? <p>Hello world </p> : <p>Bye World!</p> }
             {/* Prediction content */}
             <div className="flex flex-col space-y-4 max-w-screen-lg mx-auto">
                 {/* Post Section */}
                 <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pt-3 pb-1">
-                    <Tags/>
                     <div className="px-4 sm:px-6">
                         <p className="text-2xl mb-1">{prediction.title}</p>
                         <p className="text-sm hover:underline">{prediction.user.name}</p>
@@ -36,6 +34,7 @@ export default function Prediction({auth, prediction, comments}: PageProps<{
                         curr_reaction={prediction.has_reacted > 0 ? prediction.reactions[0].reaction_type : "none"}
                         type="Prediction"
                         auth={auth}
+                        redirect={true}
                     />
                 </div>
 

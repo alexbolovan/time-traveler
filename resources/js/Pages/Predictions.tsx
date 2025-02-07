@@ -29,7 +29,6 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
                 //<Link href={route('predictions.show', index + 1)}>
                 <div className="overflow-hidden rounded-lg bg-transparent shadow border border-white pt-3 pb-1 hover:cursor-pointer"
                      onClick={() => LoadPost(item.id)} key={index}>
-                    <Tags/>
                     <div className="px-4 sm:px-6">
                         <p className="text-2xl mb-1">{item.title}</p>
                         <p className="text-sm hover:underline">{item.user.name}</p>
@@ -45,6 +44,7 @@ export default function predictions({auth, predictions}: PageProps<{ auth: boole
                         curr_reaction={item.has_reacted > 0 ? item.reactions[0].reaction_type : "none"}
                         type="Prediction"
                         auth={auth}
+                        redirect={false}
                     />
                     {/* there should never be more than 1, but just in case we just grab the first one */}
                 </div>
